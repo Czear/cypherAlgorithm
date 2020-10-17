@@ -4,7 +4,7 @@
 unsigned int const kMaxCharCodePadding = 95;
 
 /// <summary>
-/// Parse Int to math range. Input is changed by 'change_value' until its reaches bounds
+/// Parse Int to range. Input is changed by 'change_value' until its reaches bounds
 /// </summary>
 int AdujstIntToBound(int int_to_adjust, int min, int max, int change_value) {
 	bool is_too_large = int_to_adjust > max;
@@ -16,7 +16,7 @@ int AdujstIntToBound(int int_to_adjust, int min, int max, int change_value) {
 	return int_to_adjust;
 }
 
-int GetIntIndexDigit(int index, int key) {
+int GetIntIndexDigit(int index, unsigned int key) {
 	unsigned int key_length = 1;
 
 	while (key / pow(10, key_length) >= 1) {
@@ -46,9 +46,8 @@ int main() {
 	/* Convert input variable pointer into decimal */
 	std::stringstream ss;
 	ss << &user_input_msg;
-	std::string hex_key = ss.str().replace(0, 2, "");
-	int decimal_key = std::stol(hex_key, nullptr, 16);
-
+	std::string hex_key = ss.str().replace(0, 2, "").substr(0, 8);
+	unsigned int decimal_key = std::stoll(hex_key, nullptr, 16);
 
 	/* Generate random number between [0-kMaxCharCodePadding-1] */
 	/* Range is decreased by 1 becouse 0 and maxValue would gave the same resoult */
